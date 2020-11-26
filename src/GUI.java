@@ -4,13 +4,16 @@ import java.awt.*;
 
 public class GUI {
 
-    JLabel[][] grid = new JLabel[6][7];
+    JButton[][] grid = new JButton[6][7];
 
     JButton[] buttons = new JButton[7];
 
     public GUI() {
         JFrame mainFrame = new JFrame("Connect 4");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setPreferredSize(new Dimension(300, 270));
+        //mainFrame.setResizable(false);
+
         mainFrame.setLocation(400, 150);
         JPanel mainPanel = (JPanel) mainFrame.getContentPane();
 
@@ -19,15 +22,17 @@ public class GUI {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JPanel gridPanel = new JPanel();
-        gridPanel.setBorder(new EmptyBorder(0, 15, 0, 15));
+        gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 0, 15));
         gridPanel.setLayout(new GridLayout(6, 7));
         for(int i = 0; i < grid.length; i++) {
             for(int j = 0; j < grid[i].length; j++) {
-                grid[i][j] = new JLabel("-");
+                grid[i][j] = new JButton("-");
+                grid[i][j].setBorder(new EmptyBorder(0,0,0,0));
                 gridPanel.add(grid[i][j]);
             }
         }
         JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(20, 15, 10, 15));
         buttonsPanel.setLayout(new GridLayout(1, 7));
          for(int i = 1; i <= buttons.length; i++) {
              buttons[i-1] = new JButton(String.valueOf(i));
@@ -37,7 +42,6 @@ public class GUI {
 
          mainPanel.add(gridPanel);
          mainPanel.add(buttonsPanel);
-         mainPanel.add(new JPanel());
 
          mainFrame.pack();
          mainFrame.setVisible(true);
